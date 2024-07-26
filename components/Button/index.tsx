@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ActivityIndicator,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -12,25 +13,38 @@ type ButtonsProps = {
   labelStyle?: TextStyle;
   label: string;
   handleOnPress: () => void;
+  isDisabled?: boolean;
+  isLoading?: boolean;
 };
 
 export const Button = ({
   style = {},
   label,
   labelStyle = {},
-  handleOnPress
+  handleOnPress,
+  isDisabled = false,
+  isLoading = false
 }: ButtonsProps) => {
   return (
     <TouchableOpacity
       onPress={handleOnPress}
-      style={{ ...styles.buttonBox, ...style }}
+      disabled={isDisabled}
+      style={{
+        ...styles.buttonBox,
+        ...style,
+        ...(isDisabled ? styles.disabled : {})
+      }}
     >
-      <Typography
-        type="defaultSemiBold"
-        style={{ ...styles.label, ...labelStyle }}
-      >
-        {label}
-      </Typography>
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#FFDB00" />
+      ) : (
+        <Typography
+          type="defaultSemiBold"
+          style={{ ...styles.label, ...labelStyle }}
+        >
+          {label}
+        </Typography>
+      )}
     </TouchableOpacity>
   );
 };
@@ -46,5 +60,8 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "#26355D"
+  },
+  disabled: {
+    backgroundColor: "gray"
   }
 });

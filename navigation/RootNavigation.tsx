@@ -1,15 +1,34 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { UserContext } from "@/state";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useContext } from "react";
+import { PrivateStackNavigator } from "./PrivateNavigation";
+import { PublicStackNavigator } from "./PublicNavigation";
+import { Loader } from "@/components";
 
-type RootNavigationProps = {
-    children: React.ReactNode;
-}
+const Stack = createStackNavigator();
 
-export const RootNavigation = ({ children }: RootNavigationProps) => {
+export function RootStackNavigator() {
+  const { user, isLoading } = useContext(UserContext);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <NavigationContainer>
-        
-        {children}
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {user ? (
+        <Stack.Screen
+          name="Private"
+          component={PrivateStackNavigator}
+          options={{ headerShown: false }}
+        />
+      ) : (
+        <Stack.Screen
+          name="Public"
+          component={PublicStackNavigator}
+          options={{ headerShown: false }}
+        />
+      )}
+    </Stack.Navigator>
   );
 }

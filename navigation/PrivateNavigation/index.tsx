@@ -13,7 +13,7 @@ const Stack = createStackNavigator<PrivateStackNavigatorProps>();
 
 export function PrivateStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Create" component={Create} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="List" component={List} />

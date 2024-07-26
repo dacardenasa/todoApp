@@ -1,10 +1,18 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import "react-native-reanimated";
 
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import { NavigationContainer } from '@react-navigation/native';
-import { PublicStackNavigator } from '@/navigation/PublicNavigation';
+import { NavigationContainer } from "@react-navigation/native";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import Toast from 'react-native-toast-message';
+
+import { Loader } from "@/components";
+import { UserProvider } from "@/state";
+import { RootStackNavigator } from "@/navigation/RootNavigation";
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -12,12 +20,17 @@ export default function RootLayout() {
   });
 
   if (!loaded) {
-    return null;
+    return <Loader />;
   }
 
   return (
     <NavigationContainer independent={true}>
-      <PublicStackNavigator />
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <RootStackNavigator />
+          <Toast />
+        </UserProvider>
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }

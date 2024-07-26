@@ -6,7 +6,8 @@ type TextfieldProps = TextInputProps;
 export const TextField = ({
   value,
   placeholder,
-  onChangeText
+  onChangeText,
+  ...rest
 }: TextfieldProps) => {
   return (
     <TextInput
@@ -14,6 +15,7 @@ export const TextField = ({
       value={value}
       placeholder={placeholder}
       onChangeText={onChangeText}
+      {...rest}
     />
   );
 };

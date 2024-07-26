@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import {
@@ -10,21 +10,48 @@ import {
   Typography
 } from "@/components";
 import { LoginProps } from "@/interfaces";
-
-type UserFormProps = {
-  username: string;
-  password: string;
-};
+import Toast from "react-native-toast-message";
+import { useMutation } from "@tanstack/react-query";
+import { UserCredentials } from "./models/index";
+import { AuthService } from "./services";
+import { UserContext } from "@/state";
 
 export const Login = ({ navigation }: LoginProps) => {
-  const [form, setForm] = useState<UserFormProps>({
+  const { login: loginDispatch, user } = useContext(UserContext);
+  const [form, setForm] = useState<UserCredentials>({
     username: "",
     password: ""
   });
 
-  const handleChangeField = (field: keyof UserFormProps, value: string) => {
+  const shouldDisabledLoginButton = useMemo(
+    () => Object.values(form).some((value) => !value.length),
+    [form]
+  );
+
+  const handleChangeField = (field: keyof UserCredentials, value: string) => {
     setForm((prevValues) => ({ ...prevValues, [field]: value }));
   };
+
+  const handlelogin = useCallback(() => {
+    login({ username: form.username, password: form.password });
+  }, [form]);
+
+  const { isPending, mutate: login } = useMutation({
+    mutationFn: (payload: UserCredentials) => AuthService.login(payload),
+    onError: (error) => {
+      Toast.show({
+        type: "error",
+        text1: error.message
+      });
+    },
+    onSuccess: async ({ user, token }) => {
+      Toast.show({
+        type: "success",
+        text1: `Welcome ${user.username}`
+      });
+      loginDispatch({ ...user, token });
+    }
+  });
 
   return (
     <Container style={styles.container}>
@@ -46,7 +73,11 @@ export const Login = ({ navigation }: LoginProps) => {
           onChangeText={(value) => handleChangeField("password", value)}
           secureTextEntry
         />
-        <Button label="Login" handleOnPress={() => console.info("Login")} />
+        <Button
+          label="Login"
+          isDisabled={shouldDisabledLoginButton || isPending}
+          handleOnPress={handlelogin}
+        />
         <TextButton
           label="don't you have an account?"
           handleOnPress={() => navigation.navigate("Register")}

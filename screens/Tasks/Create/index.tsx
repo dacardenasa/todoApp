@@ -1,12 +1,12 @@
-import { Box, Container, Typography } from "@/components";
 import React from "react";
-
 import { StyleSheet } from "react-native";
 
-export const Home = () => {
+import { Container, Typography } from "@/components";
+
+export const Create = () => {
   return (
     <Container style={styles.container}>
-      <Typography type="title">Home</Typography>
+      <Typography type="title">Create</Typography>
     </Container>
   );
 };

@@ -45,7 +45,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         if (user) {
           const parsedUser = JSON.parse(user);
           login(parsedUser);
+          return
         }
+        logout();
         break;
       case "background":
         console.info("Background state");

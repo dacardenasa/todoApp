@@ -9,7 +9,7 @@ export const userReducer = (state: UserState, action: UserActions) => {
     case "login":
       return { ...state, user: action.payload, isLoading: false };
     case "logout":
-      return { ...state, user: null };
+      return { ...state, user: null, isLoading: false };
     default:
       throw new Error("Invalid action type");
   }

@@ -1,6 +1,10 @@
+import 'react-native-gesture-handler';
+import "react-native-reanimated";
+
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import "react-native-reanimated";
+import { NavigationContainer } from '@react-navigation/native';
+import { PublicStackNavigator } from '@/navigation/PublicNavigation';
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -12,9 +16,8 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <NavigationContainer independent={true}>
+      <PublicStackNavigator />
+    </NavigationContainer>
   );
 }

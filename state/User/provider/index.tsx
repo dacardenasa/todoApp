@@ -24,9 +24,6 @@ export const initialState: UserState = {
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const [appStateStatus, setAppStateStatus] =
-    useState<AppStateStatus>("active");
-  useAppStateCheck({ setAppStateStatus });
 
   const login = async (payload: User) => {
     await AsyncStorage.setItem("user", JSON.stringify(payload));
@@ -37,33 +34,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     await AsyncStorage.removeItem("user");
     dispatch({ type: "logout" });
   };
-
-  const onAppStateChange = useCallback(async () => {
-    switch (appStateStatus) {
-      case "active":
-        const user = await AsyncStorage.getItem("user");
-        if (user) {
-          const parsedUser = JSON.parse(user);
-          login(parsedUser);
-          return
-        }
-        logout();
-        break;
-      case "background":
-        console.info("Background state");
-        break;
-      case "inactive":
-        console.info("Inactive state");
-        break;
-      default:
-        console.info("Unknown state");
-        break;
-    }
-  }, [appStateStatus]);
-
-  useEffect(() => {
-    onAppStateChange();
-  }, [onAppStateChange]);
 
   return (
     <UserContext.Provider

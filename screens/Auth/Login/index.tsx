@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 
 import {
@@ -9,49 +9,18 @@ import {
   TextField,
   Typography
 } from "@/components";
-import { LoginProps } from "@/interfaces";
-import Toast from "react-native-toast-message";
-import { useMutation } from "@tanstack/react-query";
-import { UserCredentials } from "./models/index";
-import { AuthService } from "./services";
-import { UserContext } from "@/state";
+import { useLogin } from "./useLogin";
 
-export const Login = ({ navigation }: LoginProps) => {
-  const { login: loginDispatch, user } = useContext(UserContext);
-  const [form, setForm] = useState<UserCredentials>({
-    username: "",
-    password: ""
-  });
-
-  const shouldDisabledLoginButton = useMemo(
-    () => Object.values(form).some((value) => !value.length),
-    [form]
-  );
-
-  const handleChangeField = (field: keyof UserCredentials, value: string) => {
-    setForm((prevValues) => ({ ...prevValues, [field]: value }));
-  };
-
-  const handlelogin = useCallback(() => {
-    login({ username: form.username, password: form.password });
-  }, [form]);
-
-  const { isPending, mutate: login } = useMutation({
-    mutationFn: (payload: UserCredentials) => AuthService.login(payload),
-    onError: (error) => {
-      Toast.show({
-        type: "error",
-        text1: error.message
-      });
-    },
-    onSuccess: async ({ user, token }) => {
-      Toast.show({
-        type: "success",
-        text1: `Welcome ${user.username}`
-      });
-      loginDispatch({ ...user, token });
-    }
-  });
+export const Login = () => {
+  const {
+    password,
+    username,
+    isPending,
+    shouldDisabledLoginButton,
+    goToRegister,
+    handleChangeField,
+    handlelogin
+  } = useLogin();
 
   return (
     <Container style={styles.container}>
@@ -63,13 +32,13 @@ export const Login = ({ navigation }: LoginProps) => {
           </Typography>
         </Typography>
         <TextField
-          value={form.username}
-          placeholder="Type your username"
+          value={username}
+          placeholder="Username"
           onChangeText={(value) => handleChangeField("username", value)}
         />
         <TextField
-          value={form.password}
-          placeholder="Type your password"
+          value={password}
+          placeholder="Password"
           onChangeText={(value) => handleChangeField("password", value)}
           secureTextEntry
         />
@@ -79,8 +48,9 @@ export const Login = ({ navigation }: LoginProps) => {
           handleOnPress={handlelogin}
         />
         <TextButton
+          isDisabled={isPending}
           label="don't you have an account?"
-          handleOnPress={() => navigation.navigate("Register")}
+          handleOnPress={goToRegister}
         />
       </Box>
     </Container>

@@ -1,14 +1,50 @@
-import { UserContext } from "@/state";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { AppStateStatus } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useContext } from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { UserContext } from "@/state";
+import { Loader } from "@/components";
+import { useAppStateCheck } from "@/hooks";
+
 import { PrivateStackNavigator } from "./PrivateNavigation";
 import { PublicStackNavigator } from "./PublicNavigation";
-import { Loader } from "@/components";
 
 const Stack = createStackNavigator();
 
 export function RootStackNavigator() {
-  const { user, isLoading } = useContext(UserContext);
+  const { user, isLoading, login, logout } = useContext(UserContext);
+  const [appStateStatus, setAppStateStatus] =
+    useState<AppStateStatus>("active");
+  useAppStateCheck({ setAppStateStatus });
+
+  const onAppStateChange = useCallback(async () => {
+    switch (appStateStatus) {
+      case "active":
+        const user = await AsyncStorage.getItem("user");
+        if (user) {
+          const parsedUser = JSON.parse(user);
+          login(parsedUser);
+          return;
+        }
+        logout();
+        break;
+      case "background":
+        console.info("Background state");
+        break;
+      case "inactive":
+        console.info("Inactive state");
+        break;
+      default:
+        console.info("Unknown state");
+        break;
+    }
+  }, [appStateStatus]);
+
+  useEffect(() => {
+    onAppStateChange();
+  }, [onAppStateChange]);
 
   if (isLoading) {
     return <Loader />;

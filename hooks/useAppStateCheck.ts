@@ -9,7 +9,7 @@ interface useAppStateCheckProps {
   setAppStateStatus: React.Dispatch<React.SetStateAction<AppStateStatus>>;
 }
 
-export default function useAppStateCheck(props: useAppStateCheckProps) {
+export function useAppStateCheck(props: useAppStateCheckProps) {
   const { setAppStateStatus } = props;
 
   const handleAppStateChange = useCallback(

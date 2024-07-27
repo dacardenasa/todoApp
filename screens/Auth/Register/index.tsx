@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 
 import {
   Box,
@@ -14,22 +9,19 @@ import {
   TextField,
   Typography
 } from "@/components";
-import { RegisterProps } from "@/interfaces";
+import { useRegister } from "./useRegister";
 
-type UserFormProps = {
-  username: string;
-  password: string;
-};
-
-export const Register = ({ navigation }: RegisterProps) => {
-  const [form, setForm] = useState<UserFormProps>({
-    username: "",
-    password: ""
-  });
-
-  const handleChangeField = (field: keyof UserFormProps, value: string) => {
-    setForm((prevValues) => ({ ...prevValues, [field]: value }));
-  };
+export const Register = () => {
+  const {
+    password,
+    username,
+    isPending,
+    isPendingRegisterUser,
+    shouldDisabledLoginButton,
+    goToLogin,
+    handleChangeField,
+    handleRegisterUser
+  } = useRegister();
 
   return (
     <Container style={styles.container}>
@@ -38,23 +30,27 @@ export const Register = ({ navigation }: RegisterProps) => {
           Register Form
         </Typography>
         <TextField
-          value={form.username}
-          placeholder="Type your username"
+          value={username}
+          placeholder="Username"
           onChangeText={(value) => handleChangeField("username", value)}
         />
         <TextField
-          value={form.password}
-          placeholder="Type your password"
+          value={password}
+          placeholder="Password"
           onChangeText={(value) => handleChangeField("password", value)}
           secureTextEntry
         />
         <Button
+          isDisabled={
+            shouldDisabledLoginButton || isPending || isPendingRegisterUser
+          }
           label="Create account"
-          handleOnPress={() => console.info("Register")}
+          handleOnPress={handleRegisterUser}
         />
         <TextButton
+          isDisabled={isPending || isPendingRegisterUser}
           label="back to Login"
-          handleOnPress={() => navigation.navigate("Login")}
+          handleOnPress={goToLogin}
         />
       </Box>
     </Container>

@@ -6,15 +6,17 @@ type TextButtonProps = {
   labelStyle?: TextStyle;
   handleOnPress: () => void;
   label: string;
+  isDisabled?: boolean;
 };
 
 export const TextButton = ({
   label,
   labelStyle = {},
-  handleOnPress
+  handleOnPress,
+  isDisabled = false
 }: TextButtonProps) => {
   return (
-    <Pressable onPress={handleOnPress}>
+    <Pressable disabled={isDisabled} onPress={handleOnPress}>
       <Typography style={{ ...styles.label, ...labelStyle }}>
         {label}
       </Typography>

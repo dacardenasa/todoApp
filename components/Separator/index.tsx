@@ -5,6 +5,8 @@ type SeparatorProps = {
   height: number;
 };
 
-export const Separator = ({ height }: SeparatorProps) => {
+const _Separator = ({ height }: SeparatorProps) => {
   return <Box style={{ height, backgroundColor: "transparent" }} />;
 };
+
+export const Separator = React.memo(_Separator);

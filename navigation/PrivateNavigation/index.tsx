@@ -5,6 +5,9 @@ export type PrivateStackNavigatorProps = {
   Create: undefined;
   Detail: {
     id: string;
+    content: string;
+    title: string;
+    date: Date;
   };
   List: undefined;
 };

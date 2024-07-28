@@ -9,7 +9,7 @@ type TextButtonProps = {
   isDisabled?: boolean;
 };
 
-export const TextButton = ({
+const _TextButton = ({
   label,
   labelStyle = {},
   handleOnPress,
@@ -23,6 +23,8 @@ export const TextButton = ({
     </Pressable>
   );
 };
+
+export const TextButton = React.memo(_TextButton);
 
 const styles = StyleSheet.create({
   label: {

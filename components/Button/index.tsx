@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   ViewStyle
 } from "react-native";
+
+import { colors } from "@/constants/colors";
+
 import { Typography } from "../Typography";
 
 type ButtonsProps = {
@@ -17,7 +20,7 @@ type ButtonsProps = {
   isLoading?: boolean;
 };
 
-export const Button = ({
+const _Button = ({
   style = {},
   label,
   labelStyle = {},
@@ -36,7 +39,7 @@ export const Button = ({
       }}
     >
       {isLoading ? (
-        <ActivityIndicator size="small" color="#FFDB00" />
+        <ActivityIndicator size="small" color={colors.hight} />
       ) : (
         <Typography
           type="defaultSemiBold"
@@ -49,6 +52,8 @@ export const Button = ({
   );
 };
 
+export const Button = React.memo(_Button);
+
 const styles = StyleSheet.create({
   buttonBox: {
     width: "100%",
@@ -56,10 +61,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
-    backgroundColor: "#FFDB00"
+    backgroundColor: colors.middle
   },
   label: {
-    color: "#26355D"
+    color: colors.low
   },
   disabled: {
     backgroundColor: "gray"

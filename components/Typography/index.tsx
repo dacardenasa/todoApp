@@ -1,14 +1,11 @@
+import React from "react";
 import { Text, type TextProps, StyleSheet } from "react-native";
 
 export type TypographyProps = TextProps & {
   type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
 };
 
-export function Typography({
-  style,
-  type = "default",
-  ...rest
-}: TypographyProps) {
+function _Typography({ style, type = "default", ...rest }: TypographyProps) {
   return (
     <Text
       style={[
@@ -23,6 +20,8 @@ export function Typography({
     />
   );
 }
+
+export const Typography = React.memo(_Typography);
 
 const styles = StyleSheet.create({
   default: {

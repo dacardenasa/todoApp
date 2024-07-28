@@ -3,15 +3,16 @@ import { StyleSheet, TextInput, TextInputProps } from "react-native";
 
 type TextfieldProps = TextInputProps;
 
-export const TextField = ({
+const _TextField = ({
   value,
   placeholder,
   onChangeText,
+  style,
   ...rest
 }: TextfieldProps) => {
   return (
     <TextInput
-      style={styles.textfield}
+      style={[styles.textfield, style]}
       value={value}
       placeholder={placeholder}
       onChangeText={onChangeText}
@@ -19,6 +20,8 @@ export const TextField = ({
     />
   );
 };
+
+export const TextField = React.memo(_TextField);
 
 const styles = StyleSheet.create({
   textfield: {

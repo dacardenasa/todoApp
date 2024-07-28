@@ -2,33 +2,40 @@ import React from "react";
 
 import { Box, Typography } from "@/components";
 import { colors } from "@/constants/colors";
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
+import { formatDate } from "@/utils";
+import { TaskCardProp } from "../models";
 
-type TaskCardProps = {
-  title: string;
-  content: string;
-  date: string;
+type TaskCardProps = TaskCardProp & {
+  handleOnPressCard: () => void;
 };
 
-export const _TaskCard = ({ content, date, title }: TaskCardProps) => {
+export const _TaskCard = ({
+  content,
+  date,
+  title,
+  handleOnPressCard
+}: TaskCardProps) => {
   return (
-    <Box style={styles.container}>
-      <Typography type="title" style={styles.label}>
-        {title}
-      </Typography>
-      <Typography type="subtitle" style={styles.label}>
-        Description:{" "}
-      </Typography>
-      <Typography type="default" style={styles.label}>
-        {content}
-      </Typography>
-      <Typography type="subtitle" style={styles.label}>
-        Limit Date:{" "}
-      </Typography>
-      <Typography type="default" style={styles.label}>
-        {date}
-      </Typography>
-    </Box>
+    <Pressable onPress={handleOnPressCard}>
+      <Box style={styles.container}>
+        <Typography type="title" style={styles.label}>
+          {title}
+        </Typography>
+        <Typography type="subtitle" style={styles.label}>
+          Description:{" "}
+        </Typography>
+        <Typography type="default" style={styles.label}>
+          {content}
+        </Typography>
+        <Typography type="subtitle" style={styles.label}>
+          Limit Date:{" "}
+        </Typography>
+        <Typography type="default" style={styles.label}>
+          {formatDate(new Date(date))}
+        </Typography>
+      </Box>
+    </Pressable>
   );
 };
 

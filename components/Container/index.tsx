@@ -9,7 +9,9 @@ type ContainerProps = {
   style: ViewStyle;
 };
 
-export const Container = ({ children, style = {} }: ContainerProps) => {
+const _Container = ({ children, style = {} }: ContainerProps) => {
   const { top } = useSafeAreaInsets();
   return <Box style={{ ...style, top }}>{children}</Box>;
 };
+
+export const Container = React.memo(_Container);

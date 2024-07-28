@@ -1,12 +1,28 @@
+import { getAuthToken } from "@/utils";
 import { AxiosInstance, AxiosStatic } from "axios";
 
 export class ApiController {
   apiInstance: AxiosInstance;
 
   constructor(apiController: AxiosStatic) {
-    this.apiInstance = apiController.create({
+    const apiIntance = apiController.create({
       baseURL: process.env.EXPO_PUBLIC_API_URL
     });
+
+    apiIntance.interceptors.request.use(
+      async (config) => {
+        const token = await getAuthToken();
+        if (token) {
+          config.headers["x-token"] = token;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    this.apiInstance = apiIntance;
   }
 
   async get(route: string) {

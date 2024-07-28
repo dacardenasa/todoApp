@@ -8,7 +8,10 @@ import { UserLoginResponse } from "../models";
 export const AuthService = {
   login: async (payload: UserCredentials): Promise<UserLoginResponse> => {
     const apiController = new ApiController(axios);
-    const { data } = await apiController.post("/auth/login", payload);
+    const { data }: { data: UserLoginResponse } = await apiController.post(
+      "/auth/login",
+      payload
+    );
     return data;
   }
 };

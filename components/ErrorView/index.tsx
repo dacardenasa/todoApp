@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+
 import { Container } from "../Container";
 import { Typography } from "../Typography";
 
@@ -7,7 +8,7 @@ type ErrorViewProps = {
   message: string;
 };
 
-export const ErrorView = ({ message }: ErrorViewProps) => {
+const _ErrorView = ({ message }: ErrorViewProps) => {
   return (
     <Container style={styles.container}>
       <Typography type="title" style={{ color: "red" }}>
@@ -16,6 +17,8 @@ export const ErrorView = ({ message }: ErrorViewProps) => {
     </Container>
   );
 };
+
+export const ErrorView = React.memo(_ErrorView)
 
 const styles = StyleSheet.create({
   container: {

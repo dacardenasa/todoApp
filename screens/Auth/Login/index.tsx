@@ -9,14 +9,15 @@ import {
   TextField,
   Typography
 } from "@/components";
+
 import { useLogin } from "./useLogin";
 
 export const Login = () => {
   const {
-    password,
-    username,
     isPending,
+    password,
     shouldDisabledLoginButton,
+    username,
     goToRegister,
     handleChangeField,
     handlelogin

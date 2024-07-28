@@ -13,11 +13,11 @@ import { useRegister } from "./useRegister";
 
 export const Register = () => {
   const {
-    password,
-    username,
     isPending,
     isPendingRegisterUser,
+    password,
     shouldDisabledLoginButton,
+    username,
     goToLogin,
     handleChangeField,
     handleRegisterUser

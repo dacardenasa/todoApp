@@ -1,14 +1,19 @@
 import React from 'react'
-import { Container } from '../Container'
 import { ActivityIndicator, StyleSheet } from 'react-native'
 
-export const Loader = () => {
+import { colors } from '@/constants/colors'
+
+import { Container } from '../Container'
+
+const _Loader = () => {
   return (
     <Container style={styles.container}>
-        <ActivityIndicator size="large" color="#FFDB00" />
+        <ActivityIndicator size="large" color={colors.middle} />
     </Container>
   )
 }
+
+export const Loader = React.memo(_Loader)
 
 const styles = StyleSheet.create({
     container: {

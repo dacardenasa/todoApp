@@ -11,11 +11,11 @@ export type ListTasksProps = StackScreenProps<
   PrivateStackNavigatorProps,
   "List"
 >;
-export type createTaskProps = StackScreenProps<
+export type CreateTaskProps = StackScreenProps<
   PrivateStackNavigatorProps,
   "Create"
 >;
-export type detailsTaskProps = StackScreenProps<
+export type DetailsTaskProps = StackScreenProps<
   PrivateStackNavigatorProps,
   "Detail"
 >;

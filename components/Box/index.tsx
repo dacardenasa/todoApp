@@ -1,7 +1,10 @@
+import React from "react";
 import { View, type ViewProps } from "react-native";
 
 export type ThemedViewProps = ViewProps;
 
-export function Box({ style, ...otherProps }: ThemedViewProps) {
+function _Box({ style, ...otherProps }: ThemedViewProps) {
   return <View style={[style]} {...otherProps} />;
 }
+
+export const Box = React.memo(_Box);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ModalProps, Pressable, StyleSheet } from "react-native";
+import { Modal, Pressable, StyleSheet } from "react-native";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Box } from "../Box";

@@ -13,10 +13,10 @@ const Stack = createStackNavigator<PrivateStackNavigatorProps>();
 
 export function PrivateStackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
+      <Stack.Screen name="List" component={List} options={{ title: "TODO list" }} />
       <Stack.Screen name="Create" component={Create} />
       <Stack.Screen name="Detail" component={Detail} />
-      <Stack.Screen name="List" component={List} />
     </Stack.Navigator>
   );
 }

@@ -3,8 +3,6 @@ import { UserContext } from "../context";
 import { userReducer } from "../reducer";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import useAppStateCheck from "@/hooks/useAppStateCheck";
-import { AppStateStatus } from "react-native";
 
 export type User = {
   username: string;

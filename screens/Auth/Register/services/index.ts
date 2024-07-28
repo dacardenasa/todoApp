@@ -5,11 +5,13 @@ import { UserCredentials } from "@/screens/Auth/models";
 
 import { UserRegisterResponse } from "../models";
 
-
 export const UserService = {
   register: async (payload: UserCredentials): Promise<UserRegisterResponse> => {
     const apiController = new ApiController(axios);
-    const { data } = await apiController.post("/users/register", payload);
+    const { data }: { data: UserRegisterResponse } = await apiController.post(
+      "/users/register",
+      payload
+    );
     return data;
   }
 };

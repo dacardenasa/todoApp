@@ -10,8 +10,8 @@ export const UserService = {
     const apiController = new ApiController(axios);
     const { data }: { data: UserRegisterResponse } = await apiController.post(
       "/users/register",
-      payload
+      payload,
     );
     return data;
-  }
+  },
 };

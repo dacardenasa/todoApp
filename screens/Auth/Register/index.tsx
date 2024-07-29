@@ -7,7 +7,7 @@ import {
   Container,
   TextButton,
   TextField,
-  Typography
+  Typography,
 } from "@/components";
 import { useRegister } from "./useRegister";
 
@@ -20,7 +20,7 @@ export const Register = () => {
     username,
     goToLogin,
     handleChangeField,
-    handleRegisterUser
+    handleRegisterUser,
   } = useRegister();
 
   return (
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#AF47D2"
+    backgroundColor: "#AF47D2",
   },
   formBox: {
     width: "100%",
-    rowGap: 16
+    rowGap: 16,
   },
   titleLabel: {
     color: "white",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

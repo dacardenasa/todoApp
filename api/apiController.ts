@@ -6,7 +6,7 @@ export class ApiController {
 
   constructor(apiController: AxiosStatic) {
     const apiIntance = apiController.create({
-      baseURL: process.env.EXPO_PUBLIC_API_URL
+      baseURL: process.env.EXPO_PUBLIC_API_URL,
     });
 
     apiIntance.interceptors.request.use(
@@ -19,7 +19,7 @@ export class ApiController {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
 
     this.apiInstance = apiIntance;

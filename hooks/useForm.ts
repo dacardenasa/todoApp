@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const useForm = <T extends object>(state: T) => {
   const [form, setForm] = useState<T>(state);
@@ -9,12 +9,12 @@ export const useForm = <T extends object>(state: T) => {
 
   const handleResetValues = () => {
     setForm(state);
-  }
+  };
 
   return {
     form,
     ...form,
     handleChangeField,
-    handleResetValues
+    handleResetValues,
   };
 };

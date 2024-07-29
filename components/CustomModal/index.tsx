@@ -15,7 +15,7 @@ const _CustomModal = ({
   children,
   isModalOpen,
   closeModal,
-  showCloseButton = false
+  showCloseButton = false,
 }: CustomModalProps) => {
   return (
     <Modal
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 16,
     right: 16,
-    zIndex: 100
+    zIndex: 100,
   },
   backdropBox: {
     width: "100%",
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, .8)"
-  }
+    backgroundColor: "rgba(0, 0, 0, .8)",
+  },
 });

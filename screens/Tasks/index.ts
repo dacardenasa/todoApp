@@ -1,3 +1,3 @@
-export * from './Create';
-export * from './Detail';
-export * from './List';
+export * from "./Create";
+export * from "./Detail";
+export * from "./List";

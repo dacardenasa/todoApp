@@ -17,12 +17,12 @@ export const useRegister = () => {
   const { login: loginDispatch } = useContext(UserContext);
   const { form, handleChangeField } = useForm<UserCredentials>({
     username: "",
-    password: ""
+    password: "",
   });
 
   const shouldDisabledLoginButton = useMemo(
     () => Object.values(form).some((value) => !value.length),
-    [form]
+    [form],
   );
 
   const { isPending, mutate: login } = useMutation({
@@ -30,16 +30,16 @@ export const useRegister = () => {
     onError: (error) => {
       Toast.show({
         type: "error",
-        text1: error.message
+        text1: error.message,
       });
     },
     onSuccess: async ({ user, token }) => {
       Toast.show({
         type: "success",
-        text1: `Welcome ${user.username}`
+        text1: `Welcome ${user.username}`,
       });
       loginDispatch({ ...user, token });
-    }
+    },
   });
 
   const { isPending: isPendingRegisterUser, mutate: registerUser } =
@@ -48,12 +48,12 @@ export const useRegister = () => {
       onError: (error) => {
         Toast.show({
           type: "error",
-          text1: error.message
+          text1: error.message,
         });
       },
       onSuccess: async (_, variables) => {
         login(variables);
-      }
+      },
     });
 
   const handleRegisterUser = () => {
@@ -69,6 +69,6 @@ export const useRegister = () => {
     shouldDisabledLoginButton,
     goToLogin,
     handleChangeField,
-    handleRegisterUser
+    handleRegisterUser,
   };
 };

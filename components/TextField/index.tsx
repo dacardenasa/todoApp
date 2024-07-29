@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     backgroundColor: "white",
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

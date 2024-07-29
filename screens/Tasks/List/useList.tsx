@@ -2,7 +2,7 @@ import React, {
   useCallback,
   useContext,
   useLayoutEffect,
-  useState
+  useState,
 } from "react";
 import { useNavigation } from "expo-router";
 
@@ -18,7 +18,6 @@ import { TaskCardProp, TaskMapped } from "./models";
 import { TaskCard } from "./components/TaskCard";
 import { HeaderRightBox } from "./components/HeaderRightBox";
 
-
 export const useList = () => {
   const navigation = useNavigation<ListTasksProps["navigation"]>();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -30,7 +29,7 @@ export const useList = () => {
       const tasksMapped = apiToTask(tasks);
       return tasksMapped;
     },
-    enabled: false
+    enabled: false,
   });
 
   const goToTaskDetails = (item: TaskCardProp) => {
@@ -38,7 +37,7 @@ export const useList = () => {
       content: item.content,
       date: item.date,
       id: item.id,
-      title: item.title
+      title: item.title,
     });
   };
 
@@ -57,17 +56,17 @@ export const useList = () => {
         handleGoCreate={() => navigation.navigate("Create")}
       />
     ),
-    [logout]
+    [navigation],
   );
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: renderHeaderRight,
       headerRightContainerStyle: {
-        marginRight: 24
-      }
+        marginRight: 24,
+      },
     });
-  }, [navigation]);
+  }, [navigation, renderHeaderRight]);
 
   useRefetchOnFocus(refetch, false, true);
 
@@ -78,6 +77,6 @@ export const useList = () => {
     isLogoutModalOpen,
     logout,
     renderFlatlistItem,
-    toggleLogoutModal
+    toggleLogoutModal,
   };
 };

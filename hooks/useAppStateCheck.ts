@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import {
   NativeEventSubscription,
   AppState,
-  AppStateStatus
+  AppStateStatus,
 } from "react-native";
 
 interface useAppStateCheckProps {
@@ -16,7 +16,7 @@ export function useAppStateCheck(props: useAppStateCheckProps) {
     async (nextAppState: AppStateStatus) => {
       setAppStateStatus(nextAppState);
     },
-    [setAppStateStatus]
+    [setAppStateStatus],
   );
 
   useEffect(() => {

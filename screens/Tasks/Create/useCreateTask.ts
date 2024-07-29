@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigation } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 
 import Toast from "react-native-toast-message";
 
@@ -17,14 +16,15 @@ export const useCreateTask = () => {
   const { form, handleChangeField, handleResetValues } = useForm<Task>({
     content: "",
     date: new Date(),
-    title: ""
+    title: "",
   });
 
-  const handleDatePickerError = (error: string | null) => setDatePickerError(error);
+  const handleDatePickerError = (error: string | null) =>
+    setDatePickerError(error);
 
   const shouldDisabledCreateButton = useMemo(
     () => Object.values(form).some((value) => !String(value).length),
-    [form]
+    [form],
   );
 
   const handleChangeDate = (selectedDate: Date | undefined) => {
@@ -36,18 +36,18 @@ export const useCreateTask = () => {
     onError: (error) => {
       Toast.show({
         type: "error",
-        text1: error.message
+        text1: error.message,
       });
     },
     onSuccess: async (data) => {
       if (data) {
         Toast.show({
           type: "success",
-          text1: `Task created successfully`
+          text1: `Task created successfully`,
         });
         navigation.navigate("List");
       }
-    }
+    },
   });
 
   const handleCreateTask = () => {

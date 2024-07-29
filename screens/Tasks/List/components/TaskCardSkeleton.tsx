@@ -1,6 +1,7 @@
-import { Box, Typography } from "@/components";
 import React from "react";
 import { StyleSheet } from "react-native";
+
+import { Box } from "@/components";
 
 export const TaskCardSkeleton = () => {
   return (
@@ -27,26 +28,26 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 8,
     backgroundColor: "white",
-    marginBottom: 8
+    marginBottom: 8,
   },
   labelSubtitleBox: {
     width: "30%",
     height: 20,
     borderRadius: 8,
     backgroundColor: "white",
-    marginBottom: 8
+    marginBottom: 8,
   },
   labeDescBox: {
     width: "100%",
     height: 10,
     backgroundColor: "white",
     borderRadius: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   labeDateBox: {
     width: "20%",
     height: 10,
     backgroundColor: "white",
     borderRadius: 8,
-  }
+  },
 });

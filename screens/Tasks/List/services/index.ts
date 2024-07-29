@@ -8,5 +8,5 @@ export const TaskService = {
     const apiController = new ApiController(axios);
     const { data }: { data: TasksResponse } = await apiController.get("/tasks");
     return data;
-  }
+  },
 };

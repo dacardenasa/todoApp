@@ -4,7 +4,7 @@ export type TaskMapped = {
   title: string;
   isActive: boolean;
   id: string;
-}
+};
 
 export type Task = {
   _id: string;
@@ -21,4 +21,3 @@ export type Task = {
 export type TasksResponse = Task[];
 
 export type TaskCardProp = Omit<TaskMapped, "isActive">;
-

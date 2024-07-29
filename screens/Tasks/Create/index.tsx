@@ -8,7 +8,7 @@ import {
   CustomDateTimePicker,
   Separator,
   TextField,
-  Typography
+  Typography,
 } from "@/components";
 import { colors } from "@/constants/colors";
 
@@ -26,7 +26,7 @@ export const Create = () => {
     handleChangeField,
     handleCreateTask,
     handleDatePickerError,
-    handleResetValues
+    handleResetValues,
   } = useCreateTask();
 
   return (
@@ -63,7 +63,7 @@ export const Create = () => {
           styles.buttonsBox,
           Platform.OS === "ios"
             ? styles.defaultButtonBoxIOSPosition
-            : styles.defaultButtonBoxPosition
+            : styles.defaultButtonBoxPosition,
         ]}
       >
         <Button
@@ -87,15 +87,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    position: "relative"
+    position: "relative",
   },
   formBox: {
     width: "100%",
-    rowGap: 16
+    rowGap: 16,
   },
   titleLabel: {
     color: colors.low,
-    textAlign: "center"
+    textAlign: "center",
   },
   customTextButton: {
     width: "100%",
@@ -105,18 +105,18 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     fontSize: 16,
     color: colors.low,
-    textAlign: "left"
+    textAlign: "left",
   },
   buttonsBox: {
     width: "100%",
     position: "absolute",
     left: 16,
-    rowGap: 16
+    rowGap: 16,
   },
   defaultButtonBoxPosition: {
-    bottom: 48
+    bottom: 48,
   },
   defaultButtonBoxIOSPosition: {
-    bottom: 96
-  }
+    bottom: 96,
+  },
 });

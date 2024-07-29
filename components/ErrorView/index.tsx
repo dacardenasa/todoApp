@@ -18,7 +18,7 @@ const _ErrorView = ({ message }: ErrorViewProps) => {
   );
 };
 
-export const ErrorView = React.memo(_ErrorView)
+export const ErrorView = React.memo(_ErrorView);
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 8,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

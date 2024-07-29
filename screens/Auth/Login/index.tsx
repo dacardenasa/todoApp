@@ -29,7 +29,7 @@ export const Login = () => {
         <Typography type="title" style={styles.titleLabel}>
           Welcome to {""}
           <Typography type="title" style={styles.altLabel}>
-            TODO APP
+            TODOAPP
           </Typography>
         </Typography>
         <TextField

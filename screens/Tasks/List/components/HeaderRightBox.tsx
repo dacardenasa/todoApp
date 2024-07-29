@@ -12,7 +12,7 @@ type HeaderRightBoxProps = {
 
 const _HeaderRightBox = ({
   handleGoCreate,
-  toggleModal
+  toggleModal,
 }: HeaderRightBoxProps) => {
   return (
     <Box style={{ flexDirection: "row", columnGap: 16 }}>
@@ -26,4 +26,4 @@ const _HeaderRightBox = ({
   );
 };
 
-export const HeaderRightBox = React.memo(_HeaderRightBox)
+export const HeaderRightBox = React.memo(_HeaderRightBox);

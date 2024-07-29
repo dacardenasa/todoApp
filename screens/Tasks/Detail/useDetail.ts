@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigation } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 
 import Toast from "react-native-toast-message";
 
@@ -20,16 +19,17 @@ export const useDetail = (task: TaskCardProp) => {
   const { form, handleChangeField, handleResetValues } = useForm<Task>({
     content: task.content ?? "",
     date: new Date(task.date) ?? new Date(),
-    title: task.title ?? ""
+    title: task.title ?? "",
   });
 
   const handleToggleModal = () => setIsModalOpen((prev) => !prev);
 
-  const handleDatePickerError = (error: string | null) => setDatePickerError(error);
+  const handleDatePickerError = (error: string | null) =>
+    setDatePickerError(error);
 
   const shouldDisableUpdateButton = useMemo(
     () => Object.values(form).some((value) => !String(value).length),
-    [form]
+    [form],
   );
 
   const handleChangeDate = (selectedDate: Date | undefined) => {
@@ -41,18 +41,18 @@ export const useDetail = (task: TaskCardProp) => {
     onError: (error) => {
       Toast.show({
         type: "error",
-        text1: error.message
+        text1: error.message,
       });
     },
     onSuccess: async (data) => {
       if (data) {
         Toast.show({
           type: "success",
-          text1: `Task updated successfully`
+          text1: `Task updated successfully`,
         });
         navigation.navigate("List");
       }
-    }
+    },
   });
 
   const { isPending: isPendingDelete, mutate: deleteTask } = useMutation({
@@ -60,18 +60,18 @@ export const useDetail = (task: TaskCardProp) => {
     onError: (error) => {
       Toast.show({
         type: "error",
-        text1: error.message
+        text1: error.message,
       });
     },
     onSuccess: async (data) => {
       if (data) {
         Toast.show({
           type: "success",
-          text1: `Task deleted successfully`
+          text1: `Task deleted successfully`,
         });
         navigation.navigate("List");
       }
-    }
+    },
   });
 
   const handleUpdateTask = () => {

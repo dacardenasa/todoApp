@@ -10,15 +10,15 @@ export const TaskService = {
     const apiController = new ApiController(axios);
     const { data }: { data: TaskResponse } = await apiController.put(
       `/tasks/${id}`,
-      task
+      task,
     );
     return data;
   },
   delete: async (id: string): Promise<TaskResponse> => {
     const apiController = new ApiController(axios);
     const { data }: { data: TaskResponse } = await apiController.delete(
-      `/tasks/${id}`
+      `/tasks/${id}`,
     );
     return data;
-  }
+  },
 };

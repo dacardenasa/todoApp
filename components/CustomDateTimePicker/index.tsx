@@ -23,7 +23,7 @@ const _CustomDateTimePicker = ({
   value,
   minimumDate,
   handleDatePickerError,
-  onChange
+  onChange,
 }: CustomDateTimePickerProps) => {
   return (
     <>
@@ -49,6 +49,6 @@ export const CustomDateTimePicker = React.memo(_CustomDateTimePicker);
 const styles = StyleSheet.create({
   errorLabel: {
     color: "red",
-    marginTop: 16
-  }
+    marginTop: 16,
+  },
 });

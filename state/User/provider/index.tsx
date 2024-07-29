@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useReducer } from "react";
 import { UserContext } from "../context";
 import { userReducer } from "../reducer";
 
@@ -17,7 +17,7 @@ export type UserState = {
 
 export const initialState: UserState = {
   user: null,
-  isLoading: true
+  isLoading: true,
 };
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {

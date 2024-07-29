@@ -1,8 +1,6 @@
 import { User, UserState } from "../provider";
 
-export type UserActions =
-  | { type: "login"; payload: User }
-  | { type: "logout"; };
+export type UserActions = { type: "login"; payload: User } | { type: "logout" };
 
 export const userReducer = (state: UserState, action: UserActions) => {
   switch (action.type) {

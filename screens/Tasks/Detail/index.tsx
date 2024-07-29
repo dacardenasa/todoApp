@@ -8,14 +8,12 @@ import {
   CustomDateTimePicker,
   CustomModal,
   Separator,
-  TextButton,
   TextField,
-  Typography
+  Typography,
 } from "@/components";
 import { useDetail } from "./useDetail";
 import { colors } from "@/constants/colors";
 
-import { formatDate } from "@/utils";
 import { DetailsTaskProps } from "@/interfaces";
 
 export const Detail = ({ route }: DetailsTaskProps) => {
@@ -34,7 +32,7 @@ export const Detail = ({ route }: DetailsTaskProps) => {
     handleDeleteTask,
     handleToggleModal,
     handleUpdateTask,
-    handleResetValues
+    handleResetValues,
   } = useDetail(route.params);
 
   return (
@@ -71,7 +69,7 @@ export const Detail = ({ route }: DetailsTaskProps) => {
           styles.buttonsBox,
           Platform.OS === "ios"
             ? styles.defaultButtonBoxIOSPosition
-            : styles.defaultButtonBoxPosition
+            : styles.defaultButtonBoxPosition,
         ]}
       >
         <Button
@@ -119,15 +117,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    position: "relative"
+    position: "relative",
   },
   formBox: {
     width: "100%",
-    rowGap: 16
+    rowGap: 16,
   },
   titleLabel: {
     color: colors.low,
-    textAlign: "center"
+    textAlign: "center",
   },
   customTextButton: {
     width: "100%",
@@ -137,19 +135,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     fontSize: 16,
     color: colors.low,
-    textAlign: "left"
+    textAlign: "left",
   },
   buttonsBox: {
     width: "100%",
     position: "absolute",
     left: 16,
-    rowGap: 16
+    rowGap: 16,
   },
   defaultButtonBoxPosition: {
-    bottom: 48
+    bottom: 48,
   },
   defaultButtonBoxIOSPosition: {
-    bottom: 96
+    bottom: 96,
   },
   modalContentBox: {
     borderRadius: 16,
@@ -157,11 +155,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
-    rowGap: 16
+    rowGap: 16,
   },
   modalButtonsBox: {
     width: "90%",
     flexDirection: "row",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 });

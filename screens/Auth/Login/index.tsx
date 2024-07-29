@@ -7,7 +7,7 @@ import {
   Container,
   TextButton,
   TextField,
-  Typography
+  Typography,
 } from "@/components";
 
 import { useLogin } from "./useLogin";
@@ -20,7 +20,7 @@ export const Login = () => {
     username,
     goToRegister,
     handleChangeField,
-    handlelogin
+    handlelogin,
   } = useLogin();
 
   return (
@@ -64,17 +64,17 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#AF47D2"
+    backgroundColor: "#AF47D2",
   },
   formBox: {
     width: "100%",
-    rowGap: 16
+    rowGap: 16,
   },
   titleLabel: {
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   altLabel: {
-    color: "#26355D"
-  }
+    color: "#26355D",
+  },
 });

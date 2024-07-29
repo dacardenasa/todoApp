@@ -10,8 +10,8 @@ export const AuthService = {
     const apiController = new ApiController(axios);
     const { data }: { data: UserLoginResponse } = await apiController.post(
       "/auth/login",
-      payload
+      payload,
     );
     return data;
-  }
+  },
 };

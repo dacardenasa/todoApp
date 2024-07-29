@@ -40,7 +40,7 @@ export function RootStackNavigator() {
         console.info("Unknown state");
         break;
     }
-  }, [appStateStatus]);
+  }, [appStateStatus, login, logout]);
 
   useEffect(() => {
     onAppStateChange();

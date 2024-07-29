@@ -8,8 +8,8 @@ export const TaskService = {
     const apiController = new ApiController(axios);
     const { data }: { data: TaskResponse } = await apiController.post(
       "/tasks/create",
-      payload
+      payload,
     );
     return data;
-  }
+  },
 };

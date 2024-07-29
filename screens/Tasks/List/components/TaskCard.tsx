@@ -14,7 +14,7 @@ export const _TaskCard = ({
   content,
   date,
   title,
-  handleOnPressCard
+  handleOnPressCard,
 }: TaskCardProps) => {
   return (
     <Pressable onPress={handleOnPressCard}>
@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.hight,
     padding: 16,
-    borderRadius: 16
+    borderRadius: 16,
   },
   label: {
-    color: "white"
-  }
+    color: "white",
+  },
 });

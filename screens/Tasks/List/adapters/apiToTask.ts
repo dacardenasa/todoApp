@@ -8,7 +8,7 @@ export const apiToTask = (tasks: TasksResponse): TaskMapped[] => {
       date,
       title,
       isActive,
-      id: _id
+      id: _id,
     };
   });
 };

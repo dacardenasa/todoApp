@@ -13,7 +13,7 @@ const _TextButton = ({
   label,
   labelStyle = {},
   handleOnPress,
-  isDisabled = false
+  isDisabled = false,
 }: TextButtonProps) => {
   return (
     <Pressable disabled={isDisabled} onPress={handleOnPress}>
@@ -29,6 +29,6 @@ export const TextButton = React.memo(_TextButton);
 const styles = StyleSheet.create({
   label: {
     color: "white",
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 });

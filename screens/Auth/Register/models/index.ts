@@ -3,4 +3,4 @@ export type UserRegisterResponse = {
   createdAt: Date;
   updatedAt: Date;
   uid: string;
-}
+};

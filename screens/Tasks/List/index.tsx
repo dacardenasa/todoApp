@@ -10,7 +10,7 @@ import {
   ErrorView,
   ListEmptyComponent,
   Separator,
-  Typography
+  Typography,
 } from "@/components";
 
 import { useList } from "./useList";
@@ -24,7 +24,7 @@ export const List = () => {
     isLogoutModalOpen,
     logout,
     renderFlatlistItem,
-    toggleLogoutModal
+    toggleLogoutModal,
   } = useList();
 
   if (error) {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    position: "relative"
+    position: "relative",
   },
   modalContentBox: {
     borderRadius: 16,
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
-    rowGap: 16
+    rowGap: 16,
   },
   modalButtonsBox: {
     width: "90%",
     flexDirection: "row",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 });

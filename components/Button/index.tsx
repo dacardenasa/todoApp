@@ -4,7 +4,7 @@ import {
   Pressable,
   StyleSheet,
   TextStyle,
-  ViewStyle
+  ViewStyle,
 } from "react-native";
 
 import { colors } from "@/constants/colors";
@@ -26,7 +26,7 @@ const _Button = ({
   labelStyle = {},
   handleOnPress,
   isDisabled = false,
-  isLoading = false
+  isLoading = false,
 }: ButtonsProps) => {
   return (
     <Pressable
@@ -35,7 +35,7 @@ const _Button = ({
       style={{
         ...styles.buttonBox,
         ...style,
-        ...(isDisabled ? styles.disabled : {})
+        ...(isDisabled ? styles.disabled : {}),
       }}
     >
       {isLoading ? (
@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
-    backgroundColor: colors.middle
+    backgroundColor: colors.middle,
   },
   label: {
-    color: colors.low
+    color: colors.low,
   },
   disabled: {
-    backgroundColor: "gray"
-  }
+    backgroundColor: "gray",
+  },
 });

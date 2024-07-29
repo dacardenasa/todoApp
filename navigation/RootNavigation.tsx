@@ -40,7 +40,8 @@ export function RootStackNavigator() {
         console.info("Unknown state");
         break;
     }
-  }, [appStateStatus, login, logout]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appStateStatus]);
 
   useEffect(() => {
     onAppStateChange();

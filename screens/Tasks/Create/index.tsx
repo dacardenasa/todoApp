@@ -1,18 +1,16 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { Platform, StyleSheet } from "react-native";
 
 import {
   Box,
   Button,
   Container,
-  TextButton,
+  CustomDateTimePicker,
+  Separator,
   TextField,
   Typography
 } from "@/components";
 import { colors } from "@/constants/colors";
-import { formatDate } from "@/utils";
 
 import { useCreateTask } from "./useCreateTask";
 
@@ -20,15 +18,15 @@ export const Create = () => {
   const {
     content,
     date,
+    datePickerError,
     title,
-    isOpenDatePicker,
     isPending,
     shouldDisabledCreateButton,
     handleChangeDate,
     handleChangeField,
     handleCreateTask,
-    handleResetValues,
-    handleShowDatepicker
+    handleDatePickerError,
+    handleResetValues
   } = useCreateTask();
 
   return (
@@ -50,25 +48,28 @@ export const Create = () => {
           numberOfLines={2}
           style={{ height: 100 }}
         />
-        <TextButton
-          labelStyle={styles.customTextButton}
-          label={formatDate(date)}
-          handleOnPress={handleShowDatepicker}
+        {Platform.OS !== "web" && <Separator height={16} />}
+        <CustomDateTimePicker
+          label="Limit Date"
+          value={date}
+          onChange={handleChangeDate}
+          minimumDate={new Date()}
+          error={datePickerError}
+          handleDatePickerError={handleDatePickerError}
         />
-        {isOpenDatePicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={new Date(date)}
-            mode="date"
-            is24Hour={true}
-            onChange={handleChangeDate}
-            minimumDate={new Date()}
-          />
-        )}
       </Box>
-      <Box style={styles.buttonsBox}>
+      <Box
+        style={[
+          styles.buttonsBox,
+          Platform.OS === "ios"
+            ? styles.defaultButtonBoxIOSPosition
+            : styles.defaultButtonBoxPosition
+        ]}
+      >
         <Button
-          isDisabled={shouldDisabledCreateButton || isPending}
+          isDisabled={
+            shouldDisabledCreateButton || isPending || Boolean(datePickerError)
+          }
           label="Create task"
           handleOnPress={handleCreateTask}
         />
@@ -109,8 +110,13 @@ const styles = StyleSheet.create({
   buttonsBox: {
     width: "100%",
     position: "absolute",
-    bottom: 48,
     left: 16,
     rowGap: 16
+  },
+  defaultButtonBoxPosition: {
+    bottom: 48
+  },
+  defaultButtonBoxIOSPosition: {
+    bottom: 96
   }
 });

@@ -1,9 +1,9 @@
 import React from "react";
 import {
   ActivityIndicator,
+  Pressable,
   StyleSheet,
   TextStyle,
-  TouchableOpacity,
   ViewStyle
 } from "react-native";
 
@@ -29,7 +29,7 @@ const _Button = ({
   isLoading = false
 }: ButtonsProps) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={handleOnPress}
       disabled={isDisabled}
       style={{
@@ -48,7 +48,7 @@ const _Button = ({
           {label}
         </Typography>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

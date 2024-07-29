@@ -15,7 +15,7 @@ import { TaskCardProp } from "../List/models";
 
 export const useDetail = (task: TaskCardProp) => {
   const navigation = useNavigation<DetailsTaskProps["navigation"]>();
-  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+  const [datePickerError, setDatePickerError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { form, handleChangeField, handleResetValues } = useForm<Task>({
     content: task.content ?? "",
@@ -23,24 +23,17 @@ export const useDetail = (task: TaskCardProp) => {
     title: task.title ?? ""
   });
 
-  const handleToggleModal = () => setIsModalOpen(prev => !prev);
+  const handleToggleModal = () => setIsModalOpen((prev) => !prev);
+
+  const handleDatePickerError = (error: string | null) => setDatePickerError(error);
 
   const shouldDisableUpdateButton = useMemo(
     () => Object.values(form).some((value) => !String(value).length),
     [form]
   );
 
-  const handleShowDatepicker = () => {
-    setIsOpenDatePicker(true);
-  };
-
-  const handleChangeDate = (
-    _: DateTimePickerEvent,
-    selectedDate: Date | undefined
-  ) => {
-    const currentDate = selectedDate;
-    setIsOpenDatePicker(false);
-    handleChangeField("date", currentDate ?? new Date());
+  const handleChangeDate = (selectedDate: Date | undefined) => {
+    handleChangeField("date", selectedDate ?? new Date());
   };
 
   const { isPending, mutate: updateTask } = useMutation({
@@ -91,17 +84,17 @@ export const useDetail = (task: TaskCardProp) => {
 
   return {
     ...form,
+    datePickerError,
     isModalOpen,
-    isOpenDatePicker,
     isPending,
     isPendingDelete,
     shouldDisableUpdateButton,
     handleChangeDate,
     handleChangeField,
+    handleDatePickerError,
     handleDeleteTask,
     handleToggleModal,
     handleUpdateTask,
     handleResetValues,
-    handleShowDatepicker
   };
 };

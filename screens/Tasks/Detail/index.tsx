@@ -1,11 +1,13 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import {
   Box,
   Button,
   Container,
+  CustomDateTimePicker,
   CustomModal,
+  Separator,
   TextButton,
   TextField,
   Typography
@@ -13,27 +15,26 @@ import {
 import { useDetail } from "./useDetail";
 import { colors } from "@/constants/colors";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { formatDate } from "@/utils";
 import { DetailsTaskProps } from "@/interfaces";
 
 export const Detail = ({ route }: DetailsTaskProps) => {
   const {
     content,
+    datePickerError,
     date,
     title,
     isModalOpen,
-    isOpenDatePicker,
     isPending,
     isPendingDelete,
     shouldDisableUpdateButton,
     handleChangeDate,
     handleChangeField,
+    handleDatePickerError,
     handleDeleteTask,
     handleToggleModal,
     handleUpdateTask,
-    handleResetValues,
-    handleShowDatepicker
+    handleResetValues
   } = useDetail(route.params);
 
   return (
@@ -55,25 +56,28 @@ export const Detail = ({ route }: DetailsTaskProps) => {
           numberOfLines={2}
           style={{ height: 100 }}
         />
-        <TextButton
-          labelStyle={styles.customTextButton}
-          label={formatDate(date)}
-          handleOnPress={handleShowDatepicker}
+        {Platform.OS !== "web" && <Separator height={16} />}
+        <CustomDateTimePicker
+          label="Limit Date"
+          value={date}
+          onChange={handleChangeDate}
+          minimumDate={new Date()}
+          error={datePickerError}
+          handleDatePickerError={handleDatePickerError}
         />
-        {isOpenDatePicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={new Date(date)}
-            mode="date"
-            is24Hour={true}
-            onChange={handleChangeDate}
-            minimumDate={new Date()}
-          />
-        )}
       </Box>
-      <Box style={styles.buttonsBox}>
+      <Box
+        style={[
+          styles.buttonsBox,
+          Platform.OS === "ios"
+            ? styles.defaultButtonBoxIOSPosition
+            : styles.defaultButtonBoxPosition
+        ]}
+      >
         <Button
-          isDisabled={shouldDisableUpdateButton || isPending}
+          isDisabled={
+            shouldDisableUpdateButton || isPending || Boolean(datePickerError)
+          }
           label="Update task"
           handleOnPress={handleUpdateTask}
         />
@@ -88,12 +92,11 @@ export const Detail = ({ route }: DetailsTaskProps) => {
           handleOnPress={handleResetValues}
         />
       </Box>
-      <CustomModal
-        isModalOpen={isModalOpen}
-        closeModal={handleToggleModal}
-      >
+      <CustomModal isModalOpen={isModalOpen} closeModal={handleToggleModal}>
         <Box style={styles.modalContentBox}>
-          <Typography type="subtitle">¿Are you sure to delete this record?</Typography>
+          <Typography type="subtitle">
+            ¿Are you sure to delete this record?
+          </Typography>
           <Box style={styles.modalButtonsBox}>
             <Button
               label="Confirm"
@@ -139,9 +142,14 @@ const styles = StyleSheet.create({
   buttonsBox: {
     width: "100%",
     position: "absolute",
-    bottom: 48,
     left: 16,
     rowGap: 16
+  },
+  defaultButtonBoxPosition: {
+    bottom: 48
+  },
+  defaultButtonBoxIOSPosition: {
+    bottom: 96
   },
   modalContentBox: {
     borderRadius: 16,

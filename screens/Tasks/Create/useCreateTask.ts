@@ -13,29 +13,22 @@ import { Task } from "../models";
 
 export const useCreateTask = () => {
   const navigation = useNavigation<CreateTaskProps["navigation"]>();
-  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+  const [datePickerError, setDatePickerError] = useState<string | null>(null);
   const { form, handleChangeField, handleResetValues } = useForm<Task>({
     content: "",
     date: new Date(),
     title: ""
   });
 
+  const handleDatePickerError = (error: string | null) => setDatePickerError(error);
+
   const shouldDisabledCreateButton = useMemo(
     () => Object.values(form).some((value) => !String(value).length),
     [form]
   );
 
-  const handleShowDatepicker = () => {
-    setIsOpenDatePicker(true);
-  };
-
-  const handleChangeDate = (
-    _: DateTimePickerEvent,
-    selectedDate: Date | undefined
-  ) => {
-    const currentDate = selectedDate;
-    setIsOpenDatePicker(false);
-    handleChangeField("date", currentDate ?? new Date());
+  const handleChangeDate = (selectedDate: Date | undefined) => {
+    handleChangeField("date", selectedDate ?? new Date());
   };
 
   const { isPending, mutate: createTask } = useMutation({
@@ -63,13 +56,13 @@ export const useCreateTask = () => {
 
   return {
     ...form,
-    isOpenDatePicker,
+    datePickerError,
     isPending,
     shouldDisabledCreateButton,
     handleChangeDate,
     handleChangeField,
     handleCreateTask,
+    handleDatePickerError,
     handleResetValues,
-    handleShowDatepicker
   };
 };

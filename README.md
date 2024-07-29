@@ -10,7 +10,12 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. create .env file in the root of the project with the format of .env.example
+if you are runing the REST todo_api on your local machine:
+assign to EXPO_PUBLIC_API_URL=http://<your ip address here>:8080/api
+otherwise you can set the environment variabe to https://todo-api-wcha.onrender.com/api
+
+3. Start the app
 
    ```bash
     npx expo start

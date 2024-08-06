@@ -80,6 +80,7 @@ export const useDetail = (task: TaskCardProp) => {
 
   const handleDeleteTask = () => {
     deleteTask(task.id);
+    handleToggleModal();
   };
 
   return {

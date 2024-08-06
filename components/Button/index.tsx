@@ -36,15 +36,13 @@ const _Button = ({
         ...styles.buttonBox,
         ...style,
         ...(isDisabled ? styles.disabled : {}),
-      }}
-    >
+      }}>
       {isLoading ? (
         <ActivityIndicator size="small" color={colors.hight} />
       ) : (
         <Typography
           type="defaultSemiBold"
-          style={{ ...styles.label, ...labelStyle }}
-        >
+          style={{ ...styles.label, ...labelStyle }}>
           {label}
         </Typography>
       )}

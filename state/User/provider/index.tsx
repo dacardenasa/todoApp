@@ -35,8 +35,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <UserContext.Provider
-      value={{ user: state.user, isLoading: state.isLoading, login, logout }}
-    >
+      value={{ user: state.user, isLoading: state.isLoading, login, logout }}>
       {children}
     </UserContext.Provider>
   );

@@ -7,7 +7,7 @@ export const TaskService = {
   create: async (payload: Task): Promise<TaskResponse> => {
     const apiController = new ApiController(axios);
     const { data }: { data: TaskResponse } = await apiController.post(
-      "/tasks/create",
+      "/tasks",
       payload,
     );
     return data;

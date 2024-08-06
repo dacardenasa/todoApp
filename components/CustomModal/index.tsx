@@ -23,8 +23,7 @@ const _CustomModal = ({
       onRequestClose={closeModal}
       style={StyleSheet.absoluteFillObject}
       visible={isModalOpen}
-      transparent
-    >
+      transparent>
       {showCloseButton && (
         <Pressable style={styles.closeButtonBox} onPress={closeModal}>
           <MaterialIcons name="close" color="#fff" size={36} />

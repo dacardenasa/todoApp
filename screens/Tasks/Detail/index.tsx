@@ -70,8 +70,7 @@ export const Detail = ({ route }: DetailsTaskProps) => {
           Platform.OS === "ios"
             ? styles.defaultButtonBoxIOSPosition
             : styles.defaultButtonBoxPosition,
-        ]}
-      >
+        ]}>
         <Button
           isDisabled={
             shouldDisableUpdateButton || isPending || Boolean(datePickerError)
@@ -81,7 +80,7 @@ export const Detail = ({ route }: DetailsTaskProps) => {
         />
         <Button
           isDisabled={isPending || isPendingDelete}
-          label="Delete task"
+          label="Mark as done"
           handleOnPress={handleToggleModal}
         />
         <Button
@@ -92,8 +91,8 @@ export const Detail = ({ route }: DetailsTaskProps) => {
       </Box>
       <CustomModal isModalOpen={isModalOpen} closeModal={handleToggleModal}>
         <Box style={styles.modalContentBox}>
-          <Typography type="subtitle">
-            ¿Are you sure to delete this record?
+          <Typography type="subtitle" style={styles.titleLabel}>
+            ¿Are you sure to mark as done this record?
           </Typography>
           <Box style={styles.modalButtonsBox}>
             <Button

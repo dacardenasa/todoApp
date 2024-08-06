@@ -64,8 +64,7 @@ export const Create = () => {
           Platform.OS === "ios"
             ? styles.defaultButtonBoxIOSPosition
             : styles.defaultButtonBoxPosition,
-        ]}
-      >
+        ]}>
         <Button
           isDisabled={
             shouldDisabledCreateButton || isPending || Boolean(datePickerError)

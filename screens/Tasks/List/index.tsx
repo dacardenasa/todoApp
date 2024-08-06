@@ -50,8 +50,7 @@ export const List = () => {
       />
       <CustomModal
         isModalOpen={isLogoutModalOpen}
-        closeModal={toggleLogoutModal}
-      >
+        closeModal={toggleLogoutModal}>
         <Box style={styles.modalContentBox}>
           <Typography type="subtitle">Logout</Typography>
           <Box style={styles.modalButtonsBox}>
